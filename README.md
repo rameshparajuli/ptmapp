@@ -1,5 +1,4 @@
 
-https://github.com/rameshparajuli/ptmapp/assets/31570709/d34c8016-5714-42e1-979e-295d122918d1
 # PTMAPP
 
 <h1 align="center">Personal Task Manager Application</h1>
