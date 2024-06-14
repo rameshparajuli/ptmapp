@@ -156,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskItem;
+export default React.memo(TaskItem);

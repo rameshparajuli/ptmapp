@@ -5,13 +5,18 @@ interface Task {
   completed: boolean;
 }
 
-export const calculateLongestStreak = (tasks: Task[]): number => {
+export const calculateLongestStreak = (
+  tasks: Task[]
+): { maxStreak: number; totalCompleted: number } => {
   let maxStreak = 0;
   let currentStreak = 0;
+
+  let totalCompleted = 0;
 
   tasks.forEach((task) => {
     if (task.completed) {
       currentStreak += 1;
+      totalCompleted += 1;
       if (currentStreak > maxStreak) {
         maxStreak = currentStreak;
       }
@@ -20,5 +25,5 @@ export const calculateLongestStreak = (tasks: Task[]): number => {
     }
   });
 
-  return maxStreak;
+  return { maxStreak, totalCompleted };
 };

@@ -45,7 +45,7 @@ const saveToStorage = async (tasks: Task[]) => {
   try {
     await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
   } catch (error) {
-    console.error("Error saving tasks to AsyncStorage", error);
+    __DEV__ && console.error("Error saving tasks to AsyncStorage", error);
   }
 };
 

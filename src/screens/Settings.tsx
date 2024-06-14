@@ -37,6 +37,7 @@ const SettingsScreen = () => {
       </View>
       <View style={styles.settingItem}>
         <Text style={styles.settingText}>
+          {/* need to fix this multiple language setting later */}
           {t("Language")}: {isEnglish ? "English" : "Nepali"}
         </Text>
         <Switch value={isEnglish} onValueChange={handleLanguageChange} />

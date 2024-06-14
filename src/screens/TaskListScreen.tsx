@@ -21,7 +21,7 @@ import Colors from "../../assets/colors";
 const TaskListScreen = ({ navigation }: { navigation: any }) => {
   const tasks = useSelector((state: RootState) => state.tasks);
   const dispatch: AppDispatch = useDispatch();
-  const [streak, setStreak] = useState(0);
+  const [count, setCount] = useState({ streak: 0, completed: 0 });
 
   const styles = useStyles();
 
@@ -33,14 +33,18 @@ const TaskListScreen = ({ navigation }: { navigation: any }) => {
           dispatch(loadTasks(JSON.parse(tasksString)));
         }
       } catch (error) {
-        console.error("Error loading tasks from AsyncStorage", error);
+        __DEV__ &&
+          console.error("Error loading tasks from AsyncStorage", error);
       }
     };
     loadTasksFromStorage();
   }, [dispatch]);
 
   useEffect(() => {
-    setStreak(calculateLongestStreak(tasks));
+    setCount({
+      streak: calculateLongestStreak(tasks).maxStreak,
+      completed: calculateLongestStreak(tasks).totalCompleted,
+    });
   }, [tasks]);
 
   const onRefresh = () => {
@@ -49,7 +53,30 @@ const TaskListScreen = ({ navigation }: { navigation: any }) => {
 
   return (
     <Animated.View style={styles.container}>
-      <Text style={styles.streakText}>Completed: {streak}</Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Text
+          numberOfLines={2}
+          style={[
+            styles.streakText,
+            {
+              textAlign: "left",
+            },
+          ]}
+        >
+          Completed: {count.completed}
+        </Text>
+        <Text
+          numberOfLines={2}
+          style={[
+            styles.streakText,
+            {
+              textAlign: "right",
+            },
+          ]}
+        >
+          Max.Streak: {count.streak}
+        </Text>
+      </View>
       <FlatList
         data={tasks}
         keyExtractor={(task) => task.id.toString()}
@@ -92,7 +119,7 @@ const useStyles = () => {
       fontSize: 18,
       fontWeight: "bold",
       marginVertical: 10,
-      textAlign: "right",
+      flex: 1,
     },
     taskList: {
       marginTop: 10,
