@@ -12,6 +12,10 @@
 
 -[@expo/vector-icons]() -[@react-native-async-storage/async-storage]() -[@react-navigation/bottom-tabs]() -[@react-navigation/native]() -[@react-navigation/native-stack]() -[@reduxjs/toolkit]() -[react-redux]()
 
+# Demo
+
+![](assets/app_demo.mp4)
+
 # Author
 
 - [@rameshparajuli](https://github.com/rameshparajuli)
